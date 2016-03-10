@@ -1,0 +1,101 @@
+<?php
+session_start();
+if(!session_is_registered(myusername)){
+header("location:index.php");
+}
+include("../include/dbinfo.inc.php");
+$user = session_is_registered(myusername);
+$companyid=$_GET['id'];
+
+mysql_connect($server,$username,$password);
+@mysql_select_db($database) or die( "Unable to select database");
+
+$query1 = "SELECT * FROM crmuser WHERE uid='$user'";
+$result1 = mysql_query($query1);
+$num1=mysql_numrows($result1);
+
+$query2 = "SELECT * FROM company WHERE cid='$companyid'";
+$result2 = mysql_query($query2);
+$num2 = mysql_numrows($result2);
+
+mysql_close();
+
+$userid=mysql_result($result1,$i,"uid");
+$first=mysql_result($result1,$i,"firstname");
+$last=mysql_result($result1,$i,"lastname");
+$user=mysql_result($result1,$i,"username");
+$pass=mysql_result($result1,$i,"password");
+
+
+?>
+<html>
+<head><title>Footfall CRM</title></head>
+<link href="../css/style.css" rel="stylesheet" type="text/css" media="screen"/>
+<body>
+<p>You are logged in as <b><?php echo $first." ".$last; ?></b> | <a href="../logout.php">Logout</a></p>
+<center>
+<div id="wrapper">
+
+<div id="header">
+<div id="logo"><h1>footfall</h1></div>
+<!--<img src="images/logo.png" alt="Footfall Logo" title="Footfall Logo" width="80%" />-->
+</div>
+<div id="content">
+
+<a href="../mainmenu.php">Back to Main Menu</a>
+
+
+<h2><font face="Arial, Helvetica, sans-serif">Add Contact</font></h2>
+
+<?php
+
+$j=0;
+while ($j < $num2) {
+$id=mysql_result($result2,$j,"cid");
+$company=mysql_result($result2,$j,"company");
+$add1=mysql_result($result2,$j,"address1");
+$add2=mysql_result($result2,$j,"address2");
+$add3=mysql_result($result2,$j,"address3");
+$county=mysql_result($result2,$j,"county");
+$tel=mysql_result($result2,$j,"telephone");
+$fax=mysql_result($result2,$j,"fax");
+$email=mysql_result($result2,$j,"email");
+$web=mysql_result($result2,$j,"web");
+$indsec=mysql_result($result2,$j,"indsec");
+
+
+?>
+
+
+<form action="insert_contact.php" method="post">
+<table border="0">
+<tr><td></td><td><input type="hidden" name="cid" value="<? echo $id; ?>" /></td></tr>
+<tr><td></td><td><input type="text" readonly name="company" size="50" value="<? echo $company; ?>"/></td></tr>
+<tr><td>Title: </td><td><input type="text" name="title" size="50"/></td></tr>
+<tr><td>Contact Firstname: </td><td><input type="text" name="cfirstname" size="50"/></td></tr>
+<tr><td>Contact Surname: </td><td><input type="text" name="csurname" size="50"/></td></tr>
+<tr><td>Position: </td><td><input type="text" name="position" size="50"/></td></tr>
+<tr><td>Telephone: </td><td><input type="text" name="telephone" size="50"/></td></tr>
+<tr><td>Mobile: </td><td><input type="text" name="mobile" size="50"/></td></tr>
+<tr><td>Fax: </td><td><input type="text" name="fax" size="50"/></td></tr>
+<tr><td>E-mail: </td><td><input type="text" name="email" size="50"/></td></tr>
+
+<tr><td><input type="Submit" value="Save" /></td></tr>
+</table>
+</form>
+
+<?php
+++$j;
+}
+
+?>
+
+
+<div id="footer">
+<br />
+Footfall CRM 1.1 developed by <a href="http://www.peterheylin.com" target="_blank">Peter Heylin</a> &copy; All Rights Reserved 2011
+</div>
+</div>
+</center>
+</body>
+</html>

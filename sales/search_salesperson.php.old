@@ -1,0 +1,153 @@
+<?
+session_start();
+if(!session_is_registered(myusername)){
+header("location:../index.php");
+}
+include("../include/dbinfo.inc.php");
+$uid = $_GET['id'];
+
+// get the search variable from the URL
+$salesperson = @$_GET['salesperson'];
+$trimmed = trim($salesperson); // trim whitespace from stored variable
+
+// rows return
+$limit = 10;
+
+// check for an empty string an display a message
+if ($trimmed=="")
+{
+	echo "<p>Please enter a search term</p>";
+	echo "<a href='../salesmenu.php?id=$uid'>Back</a>";	
+	exit;
+}
+// check for search parameter
+if (!isset($salesperson))
+{
+	echo "<p>No search term found</p>";
+	echo "<a href='../salesmenu.php?id=$uid'>Back</a>";	
+	exit;
+}
+
+mysql_connect($server,$username,$password);
+@mysql_select_db($database) or die( "Unable to select database");
+
+$query = "SELECT * FROM contact_calls,company WHERE salesperson LIKE \"%$salesperson%\" AND contact_calls.companyid = company.cid ORDER BY contact_calls.date DESC";
+//$query = "SELECT * FROM contact_calls,company WHERE contact_calls.salesperson LIKE \"%$salesperson%\" AND contact_calls.companyid = company.cid AND contact_calls.date != '0000-00-00' AND contact_calls.date BETWEEN CURRENT_DATE() AND (CURRENT_DATE() - INTERVAL 7 DAY) ORDER BY contact_calls.date DESC";
+$result = mysql_query($query);
+$num=mysql_numrows($result);
+
+$query1 = "SELECT * FROM onlineusers WHERE uid='$uid'";
+$result1 = mysql_query($query1);
+$num1 = mysql_numrows($result1);
+//$username = mysql_db_name($result1,$row['username']);
+
+$i=0;
+while ($i < $num1) {
+$uid=mysql_result($result1,$i,"uid");
+$initials=mysql_result($result1,$i,"initials");
+$firstname=mysql_result($result1,$i,"firstname");
+$lastname=mysql_result($result1,$i,"lastname");
+$username=mysql_result($result1,$i,"username");
+$i++;
+}
+
+mysql_close();
+
+?>
+<html>
+<head><title>Footfall CRM</title>
+<link href="../css/style.css" rel="stylesheet" type="text/css" media="screen"/>
+</head>
+<body>
+<p>You are logged in as <b><?echo $firstname." ".$lastname." ";?></b><a href="../logout.php?uid=<?echo $uid;?>">Logout</a></p>
+
+<center>
+<div id="wrapper">
+<div id="header">
+<div id="logo"><h1>footfall</h1></div>
+<!--<img src="images/logo.png" alt="Footfall Logo" title="Footfall Logo" width="80%" />-->
+</div>
+<div id="content">
+<table border="0">
+<tr>
+<td><form method="post" action="../mainmenu.php?id=<?echo $uid;?>"><input type="submit" value="Home" /></form></td>
+<td><form method="post" action="../search.php?id=<?echo $uid;?>"><input type="submit" value="Search" /></form></td>
+<td><form method="post" action="../salesmenu.php?id=<?echo $uid;?>"><input type="submit" value="Sales" /></form></td>
+</tr>
+</table>
+
+
+<b><center>Sales Activity Search Results</center></b><br><br>
+<a href="javascript:window.print()">Print</a>
+<br />
+<table border="1" cellspacing="2" cellpadding="4" name="contacts">
+<tr>
+<th><font face="Arial, Helvetica, sans-serif">Date</font></th>
+<th><font face="Arial, Helvetica, sans-serif">SP</font></th>
+<th><font face="Arial, Helvetica, sans-serif">Company</font></th>
+<th><font face="Arial, Helvetica, sans-serif">County</font></th>
+<th><font face="Arial, Helvetica, sans-serif">Telephone</font></th>
+<th><font face="Arial, Helvetica, sans-serif">Action</font></th>
+<th><font face="Arial, Helvetica, sans-serif">Call Back Date</font></th>
+<th><font face="Arial, Helvetica, sans-serif">Rank</font></th>
+<th><font face="Arial, Helvetica, sans-serif">Value</font></th>
+</tr>
+
+<?
+$i=0;
+while ($i < $num) {
+
+$callid=mysql_result($result,$i,"callid");
+$companyid=mysql_result($result,$i,"companyid");
+$contactid=mysql_result($result,$i,"contactid");
+$salesperson=mysql_result($result,$i,"salesperson");
+$date=mysql_result($result,$i,"date");
+$action=mysql_result($result,$i,"action");
+$callbackdate=mysql_result($result,$i,"callbackdate");
+$rank=mysql_result($result,$i,"rank");
+$value=mysql_result($result,$i,"value");
+
+$company_cid=mysql_result($result,$i,"cid");
+$company_company=mysql_result($result,$i,"company");
+$company_address1=mysql_result($result,$i,"address1");
+$company_address2=mysql_result($result,$i,"address2");
+$company_address3=mysql_result($result,$i,"address3");
+$company_county=mysql_result($result,$i,"county");
+$company_tel=mysql_result($result,$i,"telephone");
+$company_fax=mysql_result($result,$i,"fax");
+$company_email=mysql_result($result,$i,"email");
+$company_web=mysql_result($result,$i,"web");
+$company_indsec=mysql_result($result,$i,"indsec");
+
+
+?>
+
+<tr>
+<td><font face="Arial, Helvetica, sans-serif"><? echo $date; ?></font></td>
+<td><font face="Arial, Helvetica, sans-serif"><? echo $salesperson; ?></font></td>
+<td><font face="Arial, Helvetica, sans-serif"><? echo $company_company; ?></font></td>
+<td><font face="Arial, Helvetica, sans-serif"><? echo $company_county; ?></font></td>
+<td><font face="Arial, Helvetica, sans-serif"><? echo $company_tel; ?></font></td>
+<td><font face="Arial, Helvetica, sans-serif"><? echo $action; ?></font></td>
+<td><font face="Arial, Helvetica, sans-serif"><? echo $callbackdate; ?></font></td>
+<td><font face="Arial, Helvetica, sans-serif"><? echo $rank; ?></font></td>
+<td><font face="Arial, Helvetica, sans-serif"><? echo $value; ?></font></td>
+</tr>
+
+<?
+$i++;
+}
+echo "</table>";
+?>
+</div>
+
+<div id="footer">
+<br />
+Footfall CRM 1.3 developed by <a href="http://www.peterheylin.com" target="_blank">Peter Heylin</a> &copy; All Rights Reserved 2010-2012
+</div>
+
+</div>
+</center>
+</body>
+</html>
+

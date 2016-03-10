@@ -1,0 +1,331 @@
+<?php 
+session_start();
+if(!isset($_SESSION['user']))
+{header("location:index.php");}
+//else{
+if ((($_FILES["file"]["type"] == "image/jpeg"))
+&& ($_FILES["file"]["size"] < 2000000)) 
+  { 
+  if ($_FILES["file"]["error"] > 0)
+    {
+    echo "Return Code: " . $_FILES["file"]["error"] . "<br />";
+    }
+  else
+    {
+    /*
+    echo "Upload: " . $_FILES["file"]["name"] . "<br />";
+    echo "Type: " . $_FILES["file"]["type"] . "<br />";
+    echo "Size: " . ($_FILES["file"]["size"] / 1024) . " Kb<br />";
+    echo "Temp file: " . $_FILES["file"]["tmp_name"] . "<br />"; 
+	*/	
+    if (file_exists("upload/" . $_FILES["file"]["name"]))
+      {
+      echo $_FILES["file"]["name"] . " already exists. ";
+      }
+    else
+      {
+      move_uploaded_file($_FILES["file"]["tmp_name"],
+      "/content/Hosting/f/o/www.footfall.ie/web/quote/files/" . $_FILES["file"]["name"]);
+ //     echo "Stored in: " . "/content/Hosting/f/o/www.footfall.ie/web/quote/files/" . $_FILES["file"]["name"];
+      }
+    }
+  }
+else
+  {
+  echo "Invalid file";
+  }
+ 
+$name = $_POST['name']; 
+$phone = $_POST['phone'];  
+$email = $_POST['email'];
+$company = $_POST['company'];
+$mattype = $_POST['matting'];
+$color = $_POST['color']; 
+$length = $_POST['length'];
+$width = $_POST['width']; 
+$supplyonly = $_POST['supplyonly'];
+$supplyfit = $_POST['supplyfit']; 
+$sitelocation = $_POST['sitelocation'];
+$msg = $_POST['msg']; 
+
+$to = "info@footfall.ie,peter@peterheylin.com";
+$subject = "Please Quote Me";
+ 
+/* 
+$fname = $_POST['fname'];
+$lname = $_POST['lname'];
+$email = $_POST['email'];
+$msg = $_POST['msg']; 
+*/
+$mail_from = "web@footfall.ie";
+$headers = "From: $fname $lname <$mail_from>";  
+
+  
+
+// $body = "Sender: " . $fname . " " . $lname . "\n\nEmail: " . $email . "\n\nMessage:\n\n" . $msg;
+$body = "Sender: " . $name . "\n\nPhone: " . $phone . "\n\nEmail: " . $email . "\n\nCompany: " . $company . "\n\nMat Type: " . $mattype . "\n\nColour: " . $color . "\n\nDimensions:  Length: " . $length . " x Width: " . $width . "\n\nSupply Only: " . $supplyonly . "\n\nSupply & Install: " . $supplyfit . " Site Location: " . $sitelocation . "\n\nComments:\n\n" . $msg . "\n\nAttachment:" . $_FILES["file"]["name"];
+  
+/*
+if (mail($to, $subject, $body, $headers, $message)) { header("Location: sent.html"); }
+else { header("Location: error.html"); }  
+ 
+if (mail($to, $subject, $body, $headers, $messages)){
+	echo "Message Sent. Please wait to be redirected back to the Footfall home page";
+}else{
+	echo "Message failed to send. Please click '<a href=http://www.footfall.ie/quote>'here'</a>' to try again"; 
+}  
+*/
+?> 
+
+<html>
+<head></head>
+</html>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!--
+Design by Free CSS Templates
+http://www.freecsstemplates.org
+Released for free under a Creative Commons Attribution 2.5 License
+
+Name       : Domesticated
+Description: A two-column, fixed-width design for 1024x768 screen resolutions.
+Version    : 1.0
+Released   : 20100701
+
+-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>Entrance Mats Ireland - Entrance Matting Ireland - Flooring Systems Ireland - Carpet tiles Ireland - Footfall - Logo Mats</title>
+<!-- <link rel="shortcut icon" href="images/iconcopy.ico" /> --> 
+<meta name="title" content="Footfall Product Specifications" />
+<meta name="keywords" content="entrance mats matting carbon neutral negative carpet tiles interior barrier matting forma atrium plus wom millitron millitex milliken obex exterior barrier matting prior pvc matting modular matting logo message mats bounce dm playground matting dycem clean room matting washable tac mats matting anti fatigue anti microbial mats matting coir aluminium profile wet area matting lift flooring matwells frames certified installation after sales service" />
+<meta name="description" content="Footfall are a service oriented provider of high quality Milliken Carpet Tiles, Milliken Obex Entrance Matting Systems, and other flooring systems" /> 
+<script type="text/javascript" src="jquery/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="jquery/jquery.slidertron-0.1.js"></script>
+<script type="text/javascript" src="../js/menu.js"></script>
+<link href="../style.css" rel="stylesheet" type="text/css" media="screen" />
+<style type="text/css">
+@import "slidertron.css";
+</style>
+<script type="text/javascript"> 
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-21582262-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+<meta http-equiv='refresh' content='15;url=http://www.footfall.ie'>
+</head>
+<body>
+<!-- end #header-wrapper -->
+<center>
+<div class="page-wrapper">  
+<div id="header">
+	<div id="logo">
+		<h1><a href="http://www.footfall.ie">Footfall</a></h1>
+		<p style="float: right; color: #FFF; font-size: 14pt; font-family: Arial, Helvetica, sans-serif;">01 219 4604<br />091 867 651</p>
+		<a name="top"></a>
+	</div>
+	<div id="menu">
+<br /><br /><br /><br /><br /><br />
+<ul id="sddm">
+    <li><a href="http://www.footfall.ie/index.html" title="Footfall" onmouseover="mopen('m1')" onmouseout="mclosetime()">Home</a>
+	<div id="m1" onmouseover="mcancelclosetime()" onmouseout="mclosetime()">
+	<a href="http://www.footfall.ie/menus/home/about.html" >About</a>
+	<a href="http://www.footfall.ie/menus/home/our-service.html">Our Service</a>
+	<a href="http://www.footfall.ie/menus/home/news.html">News</a>
+	<a href="http://www.footfall.ie/footfall-team">Footfall Team Gallery</a>	
+	</div>     
+    </li>        
+    <li><a href="http://www.footfall.ie/entrance-mats.html" title="Entrance Mats" onmouseover="mopen('m2')" onmouseout="mclosetime()">Entrance Mats</a>
+        <div id="m2" onmouseover="mcancelclosetime()" onmouseout="mclosetime()">
+        <a href="http://www.footfall.ie/menus/entrance-matting/interior-matting.html">Interior Matting</a>
+        <a href="http://www.footfall.ie/menus/entrance-matting/exterior-matting.html">Exterior Matting</a>
+        <a href="http://www.footfall.ie/menus/entrance-matting/combination-matting.html">Combination Matting</a>
+        <a href="http://www.footfall.ie/menus/entrance-matting/aluminium-profile.html">Aluminium Profile</a>
+        <a href="http://www.footfall.ie/menus/entrance-matting/coir-matting.html">Coir Matting</a>
+			<a href="http://www.footfall.ie/menus/entrance-matting/matwells-frames.html">Matwells / Frames</a>
+			<a href="http://www.footfall.ie/downloads">Product Specifications</a>
+			<a href="http://www.footfall.ie/gallery">Installation Photo Gallery</a>
+        </div>
+    </li>
+   	<li><a href="http://www.footfall.ie/dust-mats.html" title="Dust Mats"
+	   onmouseover="mopen('m3')" onmouseout="mclosetime()">Dust Mats </a>
+        <div id="m3" onmouseover="mcancelclosetime()" onmouseout="mclosetime()">
+        <a href="http://www.footfall.ie/menus/dust-mats/education-mats.html">Education Mats</a>
+        <a href="http://www.footfall.ie/menus/dust-mats/healthcare-matting.html">Healthcare Matting</a>
+        <a href="http://www.footfall.ie/menus/dust-mats/hospitality.html">Hospitality</a>	
+			</div>	 
+		</li>  
+    <li><a href="http://www.footfall.ie/safety-matting.html" title="Safety Matting"
+	   onmouseover="mopen('m4')"onmouseout="mclosetime()">Safety Matting </a>
+        <div id="m4" onmouseover="mcancelclosetime()" onmouseout="mclosetime()">
+        <a href="http://www.footfall.ie/menus/safety-matting/anti-fatigue-matting.html">Anti Fatigue Matting</a>
+        <a href="http://www.footfall.ie/menus/safety-matting/anti-fatigue-wet-mats.html">Anti Fatigue Wet Mats</a>
+        <a href="http://www.footfall.ie/menus/safety-matting/cleanroom-mats.html">Clean Room Mats</a>	
+        <a href="http://www.footfall.ie/menus/safety-matting/wet-area-matting.html">Wet Area Matting</a>
+        <a href="http://www.footfall.ie/menus/safety-matting/leisure-matting.html">Leisure Matting</a>
+        <a href="http://www.footfall.ie/menus/safety-matting/playground-surface-matting.html">Playground Surface Matting</a>	
+        <a href="http://www.footfall.ie/menus/safety-matting/lift-flooring.html">Lift Flooring</a>	
+	</div> 
+	</li>
+    <li><a href="http://www.footfall.ie/logo-mats.html" title="Logo Mats" >Logo Mats</a></li>
+       <li><a href="http://www.footfall.ie/carpet-tiles.html" title="Carpet Tiles" onmouseover="mopen('m5')" onmouseout="mclosetime()">Carpet Tiles</a>
+        <div id="m5" onmouseover="mcancelclosetime()" onmouseout="mclosetime()">
+        <a href="http://www.footfall.ie/menus/carpet-tiles/premium-cut-pile-fusion-bonded.html">Premium Cut Pile Fusion Bonded</a>
+        <a href="http://www.footfall.ie/menus/carpet-tiles/high-performance-loop-pile.html">High Performance Loop Pile</a>
+        <a href="http://www.footfall.ie/menus/carpet-tiles/essentials-tufted-loop-pile.html">Essentials Tufted Loop Pile</a>
+        <a href="http://www.footfall.ie/menus/carpet-tiles/healthcare.html">Healthcare</a>
+	</div>	 
+    </li>
+
+    <li><a href="http://www.footfall.ie/contact.html" title="Contact Footfall">Contact</a></li>
+
+<!--<li><a href="http://www.footfall.ie/shop" target="_blank" title="Footfall Online Shop" >Shop</a></li>-->
+</ul>
+<div style="clear:both"></div>
+
+<!--	
+
+		<ul>
+			<li class="current_page_item"><a href="index.html" class="first">Home</a></li>
+			<li><a href="#">Entrance Mats</a></li>
+			<li><a href="#">Carpet Tiles</a></li>
+			<li><a href="#">Dust Mats</a></li>
+			<li><a href="#">Logo Mats</a></li>
+			<li><a href="#">Safety Matting</a></li>
+			<li><a href="#">News</a></li>
+			<li><a href="#">About</a></li>
+			<li><a href="contact.html">Contact</a></li>
+		</ul>
+-->
+	</div>
+	<!-- end #menu -->
+</div>
+<!-- end #header -->
+<hr />
+<div id="wrapper">
+	<!-- end #logo -->
+<!-- <div class="navigation"> <a href="#" class="first">[ &lt;&lt; ]</a> &nbsp; <a href="#" class="previous">[ &lt; ]</a> &nbsp; <a href="#" class="next">[ &gt; ]</a> &nbsp; <a href="#" class="last">[ &gt;&gt; ]</a> </div> -->
+<!--
+	<div id="two-columns">
+		<div class="col1">
+			<div id="foobar">
+				
+				<div class="navigation"> <a href="#" class="first">[ First ]</a> &nbsp; <a href="#" class="previous">[ Previous ]</a> &nbsp; <a href="#" class="next">[ Next ]</a> &nbsp; <a href="#" class="last">[ Last ]</a> </div>
+				<div class="viewer">
+					<div class="reel">
+						<div class="slide"> <img src="images/footfall1.jpg" alt=""> <span>Footfall Modular Matting carries a 5 year wear warranty.</span> </div>
+						<div class="slide"> <img src="images/footfall2.jpg" alt=""> <span>Footfall Modular Matting carries a 5 year wear warranty.</span> </div>
+						<div class="slide"> <img src="images/footfall3.jpg" alt=""> <span>Footfall Modular Matting carries a 5 year wear warranty.</span> </div>
+					</div>
+				</div>
+			</div>
+			<script type="text/javascript">
+
+						$('#foobar').slidertron({
+							viewerSelector:			'.viewer',
+							reelSelector:			'.viewer .reel',
+							slidesSelector:			'.viewer .reel .slide',
+							navPreviousSelector:	'.previous',
+							navNextSelector:		'.next',
+							navFirstSelector:		'.first',
+							navLastSelector:		'.last'
+						});
+						
+					</script>
+		</div> 
+		<div class="col2">
+			<blockquote>&#8220;&nbsp;The Most Effective Modular Matting System&nbsp;&#8221;</blockquote>
+		</div>
+	</div>
+-->
+</div>
+<div id="page">
+	<div id="page-bgtop">
+		<div id="content">
+
+			<div class="post">
+				<h2 class="title"><a name="#">Quote Request Sent</a></h2>
+				<div class="entry">
+					<p>
+					<?php 
+					if (mail($to, $subject, $body, $headers, $messages)){
+					echo "Message Sent.<br/>";
+					echo "Thank you for taking the time to contact Footfall.<br/>";
+					echo "A sales representative will be in touch shortly with a quote.<br/>";
+					echo "Please wait to be redirected back to the Footfall home page.<br/>";
+					}else{ 
+					echo "Message failed to send. Please click '<a href=http://www.footfall.ie/quote>'here'</a>' to try again"; 
+					}  
+
+					?>
+					</p>		
+						<br /><br /><br />	
+				</div>
+			</div>
+			
+		</div>
+		<!-- end #content -->
+<!--
+		<div id="sidebar">
+			<ul>
+				<li>
+					<h2>Aliquam tempus</h2>
+					<p>Mauris vitae nisl nec metus placerat perdiet est. Phasellus dapibus semper urna. Pellentesque ornare, orci in consectetuer hendrerit, volutpat.</p>
+				</li>
+				<li>
+					<h2>Pellenteque ornare </h2>
+					<ul>
+						<li><a href="#">Nec metus sed donec</a></li>
+						<li><a href="#">Magna lacus bibendum mauris</a></li>
+						<li><a href="#">Velit semper nisi molestie</a></li>
+						<li><a href="#">Eget tempor eget nonummy</a></li>
+						<li><a href="#">Nec metus sed donec</a></li>
+						<li><a href="#">Velit semper nisi molestie</a></li>
+						<li><a href="#">Eget tempor eget nonummy</a></li>
+						<li><a href="#">Nec metus sed donec</a></li>
+					</ul>
+				</li>
+				<li>
+					<h2>Turpis nulla</h2>
+					<ul>
+						<li><a href="#">Nec metus sed donec</a></li>
+						<li><a href="#">Magna lacus bibendum mauris</a></li>
+						<li><a href="#">Velit semper nisi molestie</a></li>
+						<li><a href="#">Eget tempor eget nonummy</a></li>
+						<li><a href="#">Nec metus sed donec</a></li>
+						<li><a href="#">Nec metus sed donec</a></li>
+						<li><a href="#">Magna lacus bibendum mauris</a></li>
+						<li><a href="#">Velit semper nisi molestie</a></li>
+						<li><a href="#">Eget tempor eget nonummy</a></li>
+						<li><a href="#">Nec metus sed donec</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+--> 
+		<!-- end #sidebar -->
+		<div style="clear: both;">&nbsp;</div>
+	</div>
+	<!-- end #page -->
+</div>
+<div id="footer">
+<table border="0"><tr><td><a href="http://www.footfall.ie/entrance-mats.html"><img src="http://www.footfall.ie/images/millikencarpet.jpg"/></a></td><td><a href="http://www.footfall.ie/menus/home/our-service.html#kuberit-profiles"><img src="http://www.footfall.ie/images/kuberit.jpg" /></a></td><td><img src="http://www.footfall.ie/images/3M2.jpg" /></td><td><img src="http://www.footfall.ie/images/instarmac.jpg" /></td><td><a href="http://www.footfall.ie/menus/safety-matting/cleanroom-mats.html"><img src="http://www.footfall.ie/images/dycem.jpg" /></a></td><td><a href="http://www.footfall.ie/menus/home/our-service.html#gradus-edging"><img src="http://www.footfall.ie/images/gradus.jpg" /></a></td></tr></table>
+	Tel: +353 (0)1 219 4604 / +353 (0)91 867 651 | Email: <a href="mailto:info@footfall.ie?subject=Enquiry from Website">info@footfall.ie</a> | Copyright &copy; 2011 Footfall Ltd. All rights reserved. | <a href="http://www.footfall.ie/sitemap.html">Sitemap</a><!--<a href="http://www.peterheylin.com/" target="_blank" style="text-decoration: none;" >&pi;</a>-->
+</div>
+<!-- end #footer -->
+</div>
+</center>
+</body>
+</html>
+<?php
+//}
+?>

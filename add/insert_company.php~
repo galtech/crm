@@ -1,0 +1,54 @@
+<?php
+session_start();
+if(!session_is_registered(myusername)){
+header("location:index.php");
+}
+include("../include/dbinfo.inc.php");
+$continue="../mainmenu.php";
+
+
+$company=$_POST['company'];
+$indsec=$_POST['indsec'];
+$add1=$_POST['address1'];
+$add2=$_POST['address2'];
+$add3=$_POST['address3'];
+$county=$_POST['county'];
+$tel=$_POST['telephone'];
+$mob=$_POST['mobile'];
+$fax=$_POST['fax'];
+$email=$_POST['email'];
+$web=$_POST['web'];
+
+mysql_connect($server,$username,$password);
+@mysql_select_db($database) or die( "Unable to select database");
+
+//$datef = date("Y/m/d",strtotime($date));
+//$callbdatef = date("Y/m/d",strtotime($callback));
+
+$query = "INSERT INTO company VALUES ('','$company','$add1','$add2','$add3','$county','$tel','$mob','$fax','$email','$web','$indsec')";
+mysql_query($query);
+
+mysql_close();
+?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+
+<head>
+<title>Entry Added Successfully</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+
+<body bgcolor="#ffffff" text="#000000">
+
+<div>
+<center>
+<img src="images/logo.png" alt="Footfall Logo" title="Footfall Logo" width="80%" />
+<br>Your entry has been saved successfully
+<p><a href="<?php print $continue; ?>">Click here to continue</a></p>
+
+</center>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,66 @@
+<?php
+session_start();
+if(!session_is_registered(myusername)){
+header("location:index.php");
+}
+include("include/dbinfo.inc.php");
+$user = session_is_registered(myusername);
+mysql_connect($server,$username,$password);
+@mysql_select_db($database) or die( "Unable to select database");
+
+$query = "SELECT * FROM crmuser WHERE uid='$user'";
+$result = mysql_query($query);
+
+$num=mysql_numrows($result);
+
+mysql_close();
+
+$id=mysql_result($result,$i,"uid");
+$first=mysql_result($result,$i,"firstname");
+$last=mysql_result($result,$i,"lastname");
+$user=mysql_result($result,$i,"username");
+$pass=mysql_result($result,$i,"password");
+
+?>
+<html>
+<head><title>Footfall CRM</title>
+<link href="css/style.css" rel="stylesheet" type="text/css" media="screen"/>
+</head>
+<body>
+<p>You are logged in as <b><?php echo $first." ".$last; ?></b> | <a href="logout.php">Logout</a></p>
+<center>
+<div id="wrapper">
+
+<div id="header">
+<div id="logo"><h1>footfall</h1></div>
+<!--<img src="images/logo.png" alt="Footfall Logo" title="Footfall Logo" width="80%" />-->
+</div>
+<div id="content">
+
+<br /><br /><br />
+<!--
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td><form method="link" action="add/add_company.php"><input type="submit" value="Add Company" /></form></td>
+<td><form method="link" action="search.php"><input type="submit" value="Search" /></form></td>
+<td><form method="link" action="salesmenu.php"><input type="submit" value="Sales" /></form></td>
+
+</tr>
+</table>
+-->
+
+
+Welcome to the Footfall CRM system. 
+<br />
+<form method="link" action="search.php"><input type="submit" value="Search CRM"/></form>
+<form method="link" action="add/add_company.php"><input type="submit" value="Add Company"/></form>
+
+</div>
+<div id="footer">
+<br />
+Footfall CRM 1.1 developed by <a href="http://www.peterheylin.com" target="_blank">Peter Heylin</a> &copy; All Rights Reserved 2011
+</div>
+</div>
+</center>
+</body>
+</html>
