@@ -21,5 +21,5 @@ this application in a few years because I now build applications using framework
 
 I may revisit and rebuild/update this application from the in the future. In the meantime, I have released the existing code in case anyone is looking for a basic CRM system for a small team or organisation. 
 
-A demo of this application in it's current state can be found here: http://footfall.heylinhosting.com/crm/
+
 
