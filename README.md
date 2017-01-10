@@ -19,7 +19,7 @@ I developed this application in my early coding days which at the time successfu
 Software development is a constant learning experience and I must inform you that no updates have been made to 
 this application in a few years because I now build applications using frameworks such as CakePHP. 
 
-I may revisit and rebuild/update this application from the in the future. In the meantime, I have released the existing code in case anyone is looking for a basic CRM system for a small team or organisation. 
+I may revisit and rebuild/update this application in the future. In the meantime, I have released the existing code in case anyone is looking for a basic CRM system for a small team or organisation. 
 
 
 
